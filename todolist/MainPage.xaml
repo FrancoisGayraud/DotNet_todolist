@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="todolist.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:todolist"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+   
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Orientation="Vertical" Grid.Row="1">
+            <TextBlock Name="Edit_Mode" RequestedTheme="Light" HorizontalAlignment="Center" Width="500" Margin="0,0,0,20" Text="Edit Mode" Visibility="Collapsed"/>
+            <TextBox Name="Title_Box" PlaceholderText="Title" RequestedTheme="Light" HorizontalAlignment="Center" Width="500" Margin="0,20,0,20"/>
+            <TextBox Name="Input_Box" PlaceholderText="Content" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" RequestedTheme="Light" HorizontalAlignment="Center" Width="500" Height="48" Margin="0,0,0,20"></TextBox>
+            <CalendarDatePicker Name="DatePicker" PlaceholderText="Due Date" RequestedTheme="Light" Width="200" HorizontalAlignment="Center" Margin="0,0,0,200" />
+            <Button Click="Add_Text" RequestedTheme="Default" HorizontalAlignment="Center" Margin="0,0,0,20" Width="300">Add</Button>
+        </StackPanel>
+        <ListView Name="Output" Grid.RowSpan="3" Grid.Column="2" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <StackPanel Margin="0,0,0,20">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Tag="{Binding id}" Click="Remove_Task" RequestedTheme="Default" HorizontalAlignment="right">
+                            <SymbolIcon Symbol="Cancel"/>
+                             </Button>
+                            <Button Tag="{Binding id}" Click="Edit_Task" RequestedTheme="Default" HorizontalAlignment="left">
+                                <SymbolIcon Symbol="Edit"/>
+                            </Button>
+                            <Button Tag="{Binding id}" Click="Done_Task" RequestedTheme="Default" HorizontalAlignment="right">
+                                <SymbolIcon Symbol="Accept"/>
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Text="{Binding title}" Foreground="Gray" FontFamily="Segoe UI Light" FontSize="24" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding content}" FontFamily="Segoe UI" HorizontalAlignment="Left"/>
+                        <DatePicker Date="{Binding date}" HorizontalAlignment="Center" Margin="0,20,0,20"/>
+                        <TextBlock Text="{Binding done}" HorizontalAlignment="Center" Tag="{Binding id}"/>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
